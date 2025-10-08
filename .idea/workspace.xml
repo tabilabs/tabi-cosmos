@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ab6c80ae-38b2-4bcb-87f2-dfd5e1d3a1d8" name="Changes" comment="refactor:refactor">
+      <change beforePath="$PROJECT_DIR$/.github/CODEOWNERS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/proto-registry.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/proto-registry.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/test.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/baseapp/baseapp.go" beforeDir="false" afterPath="$PROJECT_DIR$/baseapp/baseapp.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/buf.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/buf.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/proto/buf.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/rollback.go" beforeDir="false" afterPath="$PROJECT_DIR$/server/rollback.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/third_party/proto/buf.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/third_party/proto/buf.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/accesscontrol/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/x/accesscontrol/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/bank/types/bank.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/x/bank/types/bank.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/params/types/proposal/proposal.go" beforeDir="false" afterPath="$PROJECT_DIR$/x/params/types/proposal/proposal.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/x/slashing/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/x/slashing/README.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="GOROOT" url="file://$USER_HOME$/goproj/go1.23.9" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="31zyZ6ei1yhqhblczsKwfrPY4mE" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.automatic.dependencies.download&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/facjas/IdeaProjects/v3/tabi-cosmos&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ab6c80ae-38b2-4bcb-87f2-dfd5e1d3a1d8" name="Changes" comment="" />
+      <created>1756541248277</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1756541248277</updated>
+      <workItem from="1756541249637" duration="1686000" />
+      <workItem from="1756563052653" duration="6156000" />
+      <workItem from="1756573121632" duration="230000" />
+      <workItem from="1756573361881" duration="994000" />
+      <workItem from="1756706071758" duration="3039000" />
+      <workItem from="1757644903111" duration="2310000" />
+      <workItem from="1757904729092" duration="5974000" />
+      <workItem from="1758352728125" duration="1334000" />
+      <workItem from="1758533354260" duration="9510000" />
+      <workItem from="1759386115987" duration="1272000" />
+      <workItem from="1759387946888" duration="3021000" />
+      <workItem from="1759581483567" duration="7695000" />
+    </task>
+    <task id="LOCAL-00001" summary="refactor:refactor">
+      <option name="closed" value="true" />
+      <created>1756569159053</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1756569159053</updated>
+    </task>
+    <task id="LOCAL-00002" summary="refactor:refactor">
+      <option name="closed" value="true" />
+      <created>1756710164826</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1756710164826</updated>
+    </task>
+    <task id="LOCAL-00003" summary="refactor:refactor">
+      <option name="closed" value="true" />
+      <created>1757914718232</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1757914718232</updated>
+    </task>
+    <task id="LOCAL-00004" summary="refactor:refactor">
+      <option name="closed" value="true" />
+      <created>1757915946875</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1757915946875</updated>
+    </task>
+    <task id="LOCAL-00005" summary="refactor:refactor">
+      <option name="closed" value="true" />
+      <created>1758640286384</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1758640286384</updated>
+    </task>
+    <task id="LOCAL-00006" summary="refactor:refactor">
+      <option name="closed" value="true" />
+      <created>1758643624304</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1758643624304</updated>
+    </task>
+    <task id="LOCAL-00007" summary="refactor:refactor">
+      <option name="closed" value="true" />
+      <created>1758974286771</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1758974286771</updated>
+    </task>
+    <task id="LOCAL-00008" summary="refactor:refactor">
+      <option name="closed" value="true" />
+      <created>1759386204125</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1759386204125</updated>
+    </task>
+    <task id="LOCAL-00009" summary="refactor:refactor">
+      <option name="closed" value="true" />
+      <created>1759444715037</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1759444715039</updated>
+    </task>
+    <task id="LOCAL-00010" summary="refactor:refactor">
+      <option name="closed" value="true" />
+      <created>1759679260320</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1759679260320</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="359ffb9c-bd72-4cea-8a7d-6d06cd21f7fe" value="TOOL_WINDOW" />
+        <entry key="dd602ba1-8dc0-4d81-af3e-2db0c6d6424d" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="359ffb9c-bd72-4cea-8a7d-6d06cd21f7fe">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="structure">
+                    <value>
+                      <list>
+                        <option value="dir:/Users/facjas/IdeaProjects/v3/tabi-cosmos/x/distribution" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+            </State>
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+        <entry key="dd602ba1-8dc0-4d81-af3e-2db0c6d6424d">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="refactor:refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor:refactor" />
+  </component>
+  <component name="VgoProject">
+    <settings-migrated>true</settings-migrated>
+  </component>
+</project>
