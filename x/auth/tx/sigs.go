@@ -6,6 +6,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	cryptotypes "github.com/cosmos/cosmos-sdk/crypto/types"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/cosmos/cosmos-sdk/types/tx"
 	"github.com/cosmos/cosmos-sdk/types/tx/signing"
 )
@@ -56,19 +57,32 @@ func SignatureDataToModeInfoAndSig(data signing.SignatureData) (*tx.ModeInfo, []
 // ModeInfoAndSigToSignatureData converts a ModeInfo and raw bytes signature to a SignatureData or returns
 // an error
 func ModeInfoAndSigToSignatureData(modeInfo *tx.ModeInfo, sig []byte) (signing.SignatureData, error) {
+	if modeInfo == nil {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrTxDecode, "missing ModeInfo")
+	}
 	switch modeInfo := modeInfo.Sum.(type) {
 	case *tx.ModeInfo_Single_:
+		if modeInfo == nil || modeInfo.Single == nil {
+			return nil, sdkerrors.Wrap(sdkerrors.ErrTxDecode, "missing single ModeInfo")
+		}
 		return &signing.SingleSignatureData{
 			SignMode:  modeInfo.Single.Mode,
 			Signature: sig,
 		}, nil
 
 	case *tx.ModeInfo_Multi_:
+		if modeInfo == nil || modeInfo.Multi == nil {
+			return nil, sdkerrors.Wrap(sdkerrors.ErrTxDecode, "missing multi ModeInfo")
+		}
 		multi := modeInfo.Multi
 
 		sigs, err := decodeMultisignatures(sig)
 		if err != nil {
 			return nil, err
+		}
+		if len(multi.ModeInfos) != len(sigs) {
+			return nil, sdkerrors.Wrapf(sdkerrors.ErrTxDecode,
+				"invalid multisig: %d mode infos, %d signatures", len(multi.ModeInfos), len(sigs))
 		}
 
 		sigv2s := make([]signing.SignatureData, len(sigs))
@@ -85,7 +99,7 @@ func ModeInfoAndSigToSignatureData(modeInfo *tx.ModeInfo, sig []byte) (signing.S
 		}, nil
 
 	default:
-		panic(fmt.Errorf("unexpected ModeInfo data type %T", modeInfo))
+		return nil, sdkerrors.Wrapf(sdkerrors.ErrTxDecode, "unexpected ModeInfo data type %T", modeInfo)
 	}
 }
 

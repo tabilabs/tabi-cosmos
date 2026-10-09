@@ -442,21 +442,54 @@ func DefaultSigVerificationGasConsumer(
 	}
 }
 
-// ConsumeMultisignatureVerificationGas consumes gas from a GasMeter for verifying a multisig pubkey signature
+// ConsumeMultisignatureVerificationGas consumes gas from a GasMeter for verifying a multisig pubkey signature.
+// Structure is validated once for the whole tree here; nested multisig recursion skips re-validation.
 func ConsumeMultisignatureVerificationGas(
 	meter sdk.GasMeter, sig *signing.MultiSignatureData, pubkey multisig.PubKey,
 	params types.Params, accSeq uint64,
 ) error {
+	if err := multisig.ValidateSignatureDataStructure(sig); err != nil {
+		return sdkerrors.Wrap(sdkerrors.ErrInvalidType, err.Error())
+	}
+	return consumeMultisignatureVerificationGas(meter, sig, pubkey, params, accSeq)
+}
 
+// consumeMultisignatureVerificationGas walks true bits and charges gas. Assumes sig already
+// passed ValidateSignatureDataStructure (including nested children).
+func consumeMultisignatureVerificationGas(
+	meter sdk.GasMeter, sig *signing.MultiSignatureData, pubkey multisig.PubKey,
+	params types.Params, accSeq uint64,
+) error {
 	size := sig.BitArray.Count()
-	sigIndex := 0
+	pubKeys := pubkey.GetPubKeys()
+	// This runs before VerifyMultisignature; require bit-array size to match the key set.
+	if len(pubKeys) != size {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidType, "bit array size is incorrect, expecting: %d", len(pubKeys))
+	}
 
+	sigIndex := 0
 	for i := 0; i < size; i++ {
 		if !sig.BitArray.GetIndex(i) {
 			continue
 		}
+		// Redundant with ValidateSignatureDataStructure (len(sigs) == NumTrueBits).
+		if sigIndex >= len(sig.Signatures) {
+			return sdkerrors.Wrapf(sdkerrors.ErrInvalidType, "signature size is incorrect %d", len(sig.Signatures))
+		}
+		// Nested multisig: recurse without re-running ValidateSignatureDataStructure.
+		if nestedPk, ok := pubKeys[i].(multisig.PubKey); ok {
+			nestedSig, ok := sig.Signatures[sigIndex].(*signing.MultiSignatureData)
+			if !ok {
+				return sdkerrors.Wrapf(sdkerrors.ErrInvalidType, "expected %T, got %T", &signing.MultiSignatureData{}, sig.Signatures[sigIndex])
+			}
+			if err := consumeMultisignatureVerificationGas(meter, nestedSig, nestedPk, params, accSeq); err != nil {
+				return err
+			}
+			sigIndex++
+			continue
+		}
 		sigV2 := signing.SignatureV2{
-			PubKey:   pubkey.GetPubKeys()[i],
+			PubKey:   pubKeys[i],
 			Data:     sig.Signatures[sigIndex],
 			Sequence: accSeq,
 		}
@@ -500,10 +533,13 @@ func CountSubKeys(pub cryptotypes.PubKey) int {
 // For MultiSignatureData, it returns an array of all individual signatures,
 // as well as the aggregated signature.
 func signatureDataToBz(data signing.SignatureData) ([][]byte, error) {
-	if data == nil {
-		return nil, fmt.Errorf("got empty SignatureData")
+	if err := multisig.ValidateSignatureDataStructure(data); err != nil {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidType, err.Error())
 	}
+	return signatureDataToBzValidated(data)
+}
 
+func signatureDataToBzValidated(data signing.SignatureData) ([][]byte, error) {
 	switch data := data.(type) {
 	case *signing.SingleSignatureData:
 		return [][]byte{data.Signature}, nil
@@ -512,7 +548,7 @@ func signatureDataToBz(data signing.SignatureData) ([][]byte, error) {
 		var err error
 
 		for _, d := range data.Signatures {
-			nestedSigs, err := signatureDataToBz(d)
+			nestedSigs, err := signatureDataToBzValidated(d)
 			if err != nil {
 				return nil, err
 			}

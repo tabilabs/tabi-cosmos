@@ -88,10 +88,10 @@ func (suite *AnteTestSuite) CreateTestAccounts(numAccs int) []TestAccount {
 		err := acc.SetAccountNumber(uint64(i))
 		suite.Require().NoError(err)
 		suite.app.AccountKeeper.SetAccount(suite.ctx, acc)
-		someCoins := sdk.Coins{
+		someCoins := sdk.NewCoins(
 			sdk.NewInt64Coin("atom", 10000000),
 			sdk.NewInt64Coin("atabi", 10000000),
-		}
+		)
 		err = suite.app.BankKeeper.MintCoins(suite.ctx, minttypes.ModuleName, someCoins)
 		suite.Require().NoError(err)
 

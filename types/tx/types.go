@@ -86,6 +86,10 @@ func (t *Tx) ValidateBasic() error {
 	}
 
 	sigs := t.Signatures
+	if len(authInfo.SignerInfos) != len(sigs) {
+		return sdkerrors.Wrapf(sdkerrors.ErrUnauthorized,
+			"wrong number of SignerInfos; expected %d, got %d", len(sigs), len(authInfo.SignerInfos))
+	}
 
 	if len(sigs) == 0 {
 		return sdkerrors.ErrNoSignatures

@@ -105,10 +105,16 @@ func (w *wrapper) GetSigners() []sdk.AccAddress {
 }
 
 func (w *wrapper) GetPubKeys() ([]cryptotypes.PubKey, error) {
+	if w.tx == nil || w.tx.AuthInfo == nil {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrTxDecode, "missing AuthInfo")
+	}
 	signerInfos := w.tx.AuthInfo.SignerInfos
 	pks := make([]cryptotypes.PubKey, len(signerInfos))
 
 	for i, si := range signerInfos {
+		if si == nil {
+			return nil, sdkerrors.Wrapf(sdkerrors.ErrTxDecode, "missing SignerInfo at index %d", i)
+		}
 		// NOTE: it is okay to leave this nil if there is no PubKey in the SignerInfo.
 		// PubKey's can be left unset in SignerInfo.
 		if si.PublicKey == nil {
@@ -162,8 +168,15 @@ func (w *wrapper) GetTimeoutHeight() uint64 {
 }
 
 func (w *wrapper) GetSignaturesV2() ([]signing.SignatureV2, error) {
+	if w.tx == nil || w.tx.AuthInfo == nil {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrTxDecode, "missing AuthInfo")
+	}
 	signerInfos := w.tx.AuthInfo.SignerInfos
 	sigs := w.tx.Signatures
+	if len(signerInfos) != len(sigs) {
+		return nil, sdkerrors.Wrapf(sdkerrors.ErrTxDecode,
+			"invalid signatures: %d signer infos, %d signatures", len(signerInfos), len(sigs))
+	}
 	pubKeys, err := w.GetPubKeys()
 	if err != nil {
 		return nil, err

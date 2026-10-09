@@ -199,6 +199,16 @@ func TestBuilderValidateBasic(t *testing.T) {
 	err = txBuilder.ValidateBasic()
 	require.NoError(t, err)
 
+	// signer infos must match signatures
+	origInfos := txBuilder.tx.AuthInfo.SignerInfos
+	txBuilder.tx.AuthInfo.SignerInfos = append(origInfos, origInfos[0])
+	err = txBuilder.ValidateBasic()
+	require.Error(t, err)
+	_, code, _ = sdkerrors.ABCIInfo(err, false)
+	require.Equal(t, sdkerrors.ErrUnauthorized.ABCICode(), code)
+	txBuilder.tx.AuthInfo.SignerInfos = origInfos
+	require.NoError(t, txBuilder.ValidateBasic())
+
 	// gas limit too high
 	txBuilder.SetGasLimit(txtypes.MaxGasWanted + 1)
 	err = txBuilder.ValidateBasic()
